@@ -2,11 +2,11 @@
 Generate random guys lol
 
 
-#How to install
+# How to install
 - Download the latest Python
 
 #Requirements
 - random
 - unidecode
 
-###Only supports Vietnamese :)
+### Only supports Vietnamese :)
