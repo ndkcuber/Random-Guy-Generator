@@ -1,19 +1,19 @@
-import os
-import unidecode
+import os, datetime
 import random as r
-import subprocess
-import pyperclip
-import datetime
-import string
+from platform import system
+try:
+    import pyperclip
+    from unidecode import unidecode
+except:
+    os.system('pip install pyperclip unidecode')
+    import pyperclip
+    from unidecode import unidecode
 
 def getRandomFrom(listname):
 	return listname[r.randint(0,len(listname)-1)]
 
-def copyToClipboard(txt):
-    cmd='echo '+txt.strip()+'|pbcopy'
-    return subprocess.check_call(cmd, shell=True)
-
-os.system('cls')
+if system()=="Linux":os.system('clear')
+else: os.system("cls")
 
 def generate():
 	ho = ['Nguyễn', 'Trần', 'Đặng', 'Phạm', 'Đậu', 'Ngô', 'Trịnh', 'Lý', 'Đoàn', 'Thái', 'Triệu']
@@ -41,34 +41,28 @@ def generate():
 	domains = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com', 'googlemail.com', 'icloud.com', 'proton.me', 'juno.com', 'cheovani.ru', 'onedrive.com', 'outlook.uk', 'outlook.de', 'sublime.com', 'ggweb.com']
 
 	#username
-	username = str(unidecode.unidecode(fullname).replace(' ','').lower()+str(r.randint(99,9876)))
+	username = unidecode(fullname).replace(' ','').lower()+str(r.randint(99,9876))
 
 	#generated email
-	mail = str(unidecode.unidecode(fullname).replace(' ','').lower()+str(r.randint(99,9876))+"@"+getRandomFrom(domains))
+	mail = unidecode(fullname).replace(' ','').lower()+str(r.randint(99,9876))+"@"+getRandomFrom(domains)
 
 	#random ip
-	ip = str(str(r.randint(1,99))+"."+str(r.randint(1,999))+"."+str(r.randint(1,10))+"."+str(r.randint(1,999)))
+	ip = "{}.{}.{}.{}".format(*[r.randint(0,99) for i in range(4)])
 	
 	#random address
-	address = str(str(r.randint(0,999))+getRandomFrom(letters)+" "+str(getRandomFrom(road)))
+	address = str(r.randint(0,999))+getRandomFrom(letters)+" "+getRandomFrom(road)
 	
 	#password
-	password = ""
-	for i in range(10):
-		password = password + getRandomFrom(password_symbols)
+	password = "".join([getRandomFrom(password_symbols) for i in range(10)])
 
 	#id number
-	id_number = ""
-	for i in range(13):
-		id_number = id_number + getRandomFrom(numbers)
+	id_number = "".join([getRandomFrom(numbers) for i in range(10)])
 
 	today = datetime.date.today()
 	oldest_date = today - datetime.timedelta(days=365*40)
 	sinhnhat = oldest_date + datetime.timedelta(days=r.randint(0, (today - oldest_date).days))
 
 	return str("  Họ và Tên: "+fullname+"\n Username: "+username+"\n Email: "+mail+"\n IP: "+ip+"\n Địa chỉ: "+address+"\n CCCD/CMND: "+id_number+"\n Password: "+password+"\n DOB: "+str(sinhnhat.strftime('%d/%m/%Y')))
-
-
 
 bruh = generate()
 pyperclip.copy(bruh)
