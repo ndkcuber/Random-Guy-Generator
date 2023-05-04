@@ -62,7 +62,7 @@ def generate():
 	oldest_date = today - datetime.timedelta(days=365*40)
 	sinhnhat = oldest_date + datetime.timedelta(days=r.randint(0, (today - oldest_date).days))
 
-	return str("  Họ và Tên: "+fullname+"\n Username: "+username+"\n Email: "+mail+"\n IP: "+ip+"\n Địa chỉ: "+address+"\n CCCD/CMND: "+id_number+"\n Password: "+password+"\n DOB: "+str(sinhnhat.strftime('%d/%m/%Y')))
+	return str(" Họ và Tên: "+fullname+"\n Username: "+username+"\n Email: "+mail+"\n IP: "+ip+"\n Địa chỉ: "+address+"\n CCCD/CMND: "+id_number+"\n Password: "+password+"\n DOB: "+str(sinhnhat.strftime('%d/%m/%Y')))
 
 bruh = generate()
 pyperclip.copy(bruh)
